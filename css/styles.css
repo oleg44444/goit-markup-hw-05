@@ -5,6 +5,7 @@
   --primary-brand: #4d5ae5;
   --light-mode-backgrounds: #f4f4fd;
   --section-padding: 120px 0;
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -104,6 +105,7 @@ button {
   position: relative;
 
   text-decoration: none;
+  transition: color 250ms var(--timing-function);
 }
 .header-link:hover,
 .header-link:focus {
@@ -129,9 +131,10 @@ button {
   font-weight: 400;
   line-height: 1.5;
   text-decoration: none;
+  transition: color 250ms var(--timing-function);
 }
-.adress-link:hover,
-.adress-link:focus {
+.address-link:hover,
+.address-link:focus {
   color: var(--accept-color);
 }
 
@@ -175,6 +178,7 @@ button {
   background-color: var(--primary-brand);
   cursor: pointer;
   margin: 0 auto;
+  transition: background-color 250ms var(--timing-function);
 }
 .hero-btn:hover,
 .hero-btn:focus {
@@ -313,6 +317,7 @@ button {
   background-color: var(--primary-brand);
   align-items: center;
   justify-content: center;
+  transition: background-color 250ms var(--timing-function);
 }
 .social-list-icon {
   fill: #ffffff;
@@ -348,10 +353,7 @@ button {
   color: #8e8f99;
   border: 1px solid currentColor;
   border-radius: 4px;
-}
-.customers-link:hover,
-.customer-link:focus {
-  color: #404bbf;
+  transition: color 250ms var(--timing-function);
 }
 
 .customer-icon {
@@ -359,6 +361,11 @@ button {
   height: 56px;
   fill: currentColor;
 }
+.customers-link:hover,
+.customer-link:focus {
+  color: #404bbf;
+}
+
 /* Footer */
 .footer {
   background-color: var(--primary-text-color);
@@ -394,8 +401,7 @@ button {
   display: flex;
   gap: 16px;
 }
-.social-media-item {
-}
+
 .social-media-link {
   display: flex;
   align-items: center;
@@ -404,6 +410,7 @@ button {
   height: 40px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 250ms var(--timing-function);
 }
 .social-media-link:hover,
 .social-media-link:focus {
@@ -438,6 +445,10 @@ button {
   letter-spacing: 0.04em;
   background-color: var(--light-mode-backgrounds);
   cursor: pointer;
+  box-shadow: none;
+  transition: box-shadow 250ms var(--timing-function),
+    background-color 250ms var(--timing-function),
+    color 250ms var(--timing-function);
 }
 .projects-btn:hover,
 .projects-btn:focus {
@@ -466,6 +477,8 @@ button {
 
 .works-link {
   display: block;
+  box-shadow: none;
+  transition: box-shadow 250ms var(--timing-function);
 }
 .works-link:hover,
 .works-link:focus {
@@ -473,9 +486,24 @@ button {
     0px 2px 1px 0px rgba(46, 47, 66, 0.16),
     0px 1px 6px 0px rgba(46, 47, 66, 0.08);
 }
-.work-thumb {
+.works-thumb {
   position: relative;
+  overflow: hidden;
 }
+/* .works-thumb::before {
+  display: inline-block;
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-brand);
+
+  opacity: 0;
+} */
+/* .works-link:hover .works-thumb::before,
+.works-link:focus .works-thumb::before {
+  opacity: 1;
+} */
 .works-text {
   position: absolute;
   top: 0;
@@ -483,7 +511,22 @@ button {
   padding: 40px 32px;
   line-height: 1.5;
   color: var(--light-mode-backgrounds);
+  opacity: 0;
+  background-color: var(--primary-brand);
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  transform: translateY(100%);
+  transition: transform 250ms var(--timing-function),
+    opacity 250ms var(--timing-function), color 250ms var(--timing-function);
 }
+
+.works-link:hover .works-text,
+.works-link:focus .works-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .works-item {
   width: 360px;
   height: 420px;
@@ -510,4 +553,53 @@ button {
 
   line-height: 1.5;
   color: var(--title-text-color);
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+  transition: opacity 250ms var(--timing-function),
+    visibility 250ms var(--timing-function);
+}
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.modal {
+  min-height: 584px;
+  min-width: 408px;
+  background-color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms var(--timing-function);
+  padding: 24px;
+}
+
+.backdrop-icon {
+  width: 8px;
+  height: 8px;
+  fill: #000;
+}
+.backdrop-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid #e7e9fc;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  transition: fill 250ms var(--timing-function),
+    background-color 250ms var(--timing-function);
+}
+.backdrop-btn:hover,
+.backdrop-btn:focus {
+  fill: #fff;
+  background-color: var(--accept-color);
 }
